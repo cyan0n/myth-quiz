@@ -17,3 +17,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.layout {
+  @apply w-screen
+    h-screen
+    bg-gray-400
+    text-gray-100;
+}
+
+.layout > main {
+  @apply max-w-lg mx-auto p-4;
+}
