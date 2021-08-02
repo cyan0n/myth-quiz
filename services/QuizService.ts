@@ -1,13 +1,16 @@
 import { connectToDatabase } from "../lib/mongodb";
 import { ObjectId, Db } from "mongodb";
+import { Question, Quiz } from "../types";
 
 import quiz from "../docs/quiz";
 
-const collection_name = "quizzes";
+const connectToCollection = async () => {
+  const { db }: { db: Db } = await connectToDatabase();
+  return db.collection("quizzes");
+};
 
 export const SyncQuiz = async () => {
-  const { db }: { db: Db } = await connectToDatabase();
-  const collection = db.collection(collection_name);
+  const collection = await connectToCollection();
   collection.deleteMany({});
   collection.insertMany(quiz, (err, result) => {
     if (err) throw err;
@@ -16,6 +19,15 @@ export const SyncQuiz = async () => {
 };
 
 export const GetAllQuizzes = async () => {
-  const { db }: { db: Db } = await connectToDatabase();
-  return db.collection(collection_name).find({}).toArray();
+  const collection = await connectToCollection();
+  const result = await collection.find({}).toArray();
+  return JSON.parse(JSON.stringify(result)) as Quiz[];
+};
+
+export const GetQuizByName = async (name: string) => {
+  const collection = await connectToCollection();
+  const result = await collection.findOne({
+    name: new RegExp(`^${name}$`, "i"),
+  });
+  return JSON.parse(JSON.stringify(result)) as Quiz;
 };
