@@ -9,9 +9,11 @@ export type NextIronRequest = NextApiRequest & { session: Session };
 export type NextIronHandler = ({
   req,
   res,
+  params,
 }: {
   req: NextIronRequest;
   res: NextApiResponse;
+  params: any;
 }) => void | Promise<void>;
 
 const withSession = (handler: NextIronHandler) =>
