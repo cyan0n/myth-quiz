@@ -6,15 +6,18 @@ const { SESSION_PASS } = process.env;
 
 // optionally add stronger typing for next-specific implementation
 export type NextIronRequest = NextApiRequest & { session: Session };
-export type NextIronHandler = (
-  req: NextIronRequest,
-  res: NextApiResponse,
-) => void | Promise<void>;
+export type NextIronHandler = ({
+  req,
+  res,
+}: {
+  req: NextIronRequest;
+  res: NextApiResponse;
+}) => void | Promise<void>;
 
 const withSession = (handler: NextIronHandler) =>
   withIronSession(handler, {
     password: SESSION_PASS as string,
-    cookieName: "next-iron-session/examples/next.js",
+    cookieName: "myth-quiz-user",
     cookieOptions: {
       // the next line allows to use the session in non-https environments like
       // Next.js dev mode (http://localhost:3000)
