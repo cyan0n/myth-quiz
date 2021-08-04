@@ -4,7 +4,7 @@ import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
 import RegistrationModal from "../../components/RegistrationModal";
 import withSession from "../../lib/session";
-import { GetQuizByName } from "../../services/QuizService";
+import { GetLocalQuizByName } from "../../services/QuizService";
 import { Quiz } from "../../types";
 
 interface LandingProps {
@@ -35,7 +35,7 @@ export const getServerSideProps = withSession(async function ({
   res,
   params: { myth },
 }) {
-  const quiz = await GetQuizByName(myth);
+  const quiz = await GetLocalQuizByName(myth);
   const props: LandingProps = {
     quiz,
   };

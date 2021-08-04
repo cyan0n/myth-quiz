@@ -31,3 +31,7 @@ export const GetQuizByName = async (name: string) => {
   });
   return JSON.parse(JSON.stringify(result)) as Quiz;
 };
+
+export const GetLocalQuizByName = (name: string) => {
+  return require("../data/" + name);
+};
