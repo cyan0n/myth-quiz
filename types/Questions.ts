@@ -1,17 +1,17 @@
-export interface Question {
+export interface QuestionType {
   type: "choice" | "truefalse" | "sort";
   text: string;
 }
 
-export interface ChoiceQuestion extends Question {
+export interface ChoiceQuestionType extends QuestionType {
   choices: string[];
   answer: number;
 }
 
-export interface TrueFalseQuestion extends Question {
+export interface TrueFalseQuestionType extends QuestionType {
   answer: boolean;
 }
 
-export interface SortQuestion extends Question {
+export interface SortQuestionType extends QuestionType {
   order: string[];
 }

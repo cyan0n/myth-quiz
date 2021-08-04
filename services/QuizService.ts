@@ -1,6 +1,6 @@
 import { connectToDatabase } from "../lib/mongodb";
 import { ObjectId, Db } from "mongodb";
-import { Question, Quiz } from "../types";
+import { QuestionType, Quiz } from "../types";
 
 import data from "../data";
 
@@ -33,5 +33,6 @@ export const GetQuizByName = async (name: string) => {
 };
 
 export const GetLocalQuizByName = (name: string) => {
-  return require("../data/" + name);
+  const result = JSON.parse(JSON.stringify(require("../data/" + name))) as Quiz;
+  return result;
 };
