@@ -9,11 +9,11 @@ import StepsNumbersVertical from "../components/steps/stepsNumbersVertical";
 interface QuizProps {}
 
 const Quiz: React.FC<QuizProps> = ({}) => {
-    return (
-        <Layout>
-            <StepsNumbersVertical />
-        </Layout>
-    )
+  return (
+    <Layout>
+      <StepsNumbersHorizontal />
+    </Layout>
+  );
 };
 
 export default Quiz;
