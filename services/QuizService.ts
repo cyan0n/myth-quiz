@@ -2,7 +2,7 @@ import { connectToDatabase } from "../lib/mongodb";
 import { ObjectId, Db } from "mongodb";
 import { Question, Quiz } from "../types";
 
-import quiz from "../docs/quiz";
+import data from "../data";
 
 const connectToCollection = async () => {
   const { db }: { db: Db } = await connectToDatabase();
@@ -12,7 +12,7 @@ const connectToCollection = async () => {
 export const SyncQuiz = async () => {
   const collection = await connectToCollection();
   collection.deleteMany({});
-  collection.insertMany(quiz, (err, result) => {
+  collection.insertMany(data, (err, result) => {
     if (err) throw err;
     return result?.insertedCount;
   });
@@ -27,7 +27,7 @@ export const GetAllQuizzes = async () => {
 export const GetQuizByName = async (name: string) => {
   const collection = await connectToCollection();
   const result = await collection.findOne({
-    name: new RegExp(`^${name}$`, "i"),
+    slug: new RegExp(`^${name}$`, "i"),
   });
   return JSON.parse(JSON.stringify(result)) as Quiz;
 };

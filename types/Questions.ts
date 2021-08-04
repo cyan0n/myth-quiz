@@ -1,7 +1,6 @@
 export interface Question {
   type: "choice" | "truefalse" | "sort";
   text: string;
-  image?: string;
 }
 
 export interface ChoiceQuestion extends Question {
