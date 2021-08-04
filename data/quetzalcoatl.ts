@@ -31,8 +31,8 @@ export default {
       answer: 3,
     },
     {
-      type: "Gli aztechi pensarono al ritorno di Quetzalcoatl nel 1519",
-      text: "testo domanda",
+      type: "truefalse",
+      text: "Gli aztechi pensarono al ritorno di Quetzalcoatl nel 1519",
       answer: true,
     },
     {
