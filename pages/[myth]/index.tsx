@@ -4,8 +4,9 @@ import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
 import RegistrationModal from "../../components/RegistrationModal";
 import withSession from "../../lib/session";
-import { GetLocalQuizByName } from "../../services/QuizService";
+import { GetQuizByName } from "../../services/QuizService";
 import { Quiz } from "../../types";
+import Questions from "../../components/questions/Questions";
 
 interface LandingProps {
   user?: string;
@@ -25,6 +26,7 @@ const Landing: React.FC<LandingProps> = ({ user, quiz }) => {
         src="/images/chimera.jpeg"
         style={{ borderRadius: "100%" }}
       />
+      <Questions questions={quiz.quiz} />
       <RegistrationModal user={user} />
     </Layout>
   );
@@ -35,7 +37,7 @@ export const getServerSideProps = withSession(async function ({
   res,
   params: { myth },
 }) {
-  const quiz = await GetLocalQuizByName(myth);
+  const quiz = await GetQuizByName(myth);
   const props: LandingProps = {
     quiz,
   };
