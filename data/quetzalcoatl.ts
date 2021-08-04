@@ -1,5 +1,6 @@
 export default {
   name: "La leggenda del cacao",
+  slug: "quetzacoatl",
   image: "",
   quiz: [
     {
