@@ -6,8 +6,9 @@ interface LandingProps {}
 
 const Landing: React.FC<LandingProps> = ({}) => {
   return (
-    <Layout>
-      <Form>
+    <Layout> 
+      <Form className="flex flex-col items-center">
+      <h1 className="mt-24 text-xl text-center">Inserisci il tuo nome per partecipare alla sfida!</h1>
         <Form.Item
           label="Nome"
           name="name"
@@ -17,7 +18,7 @@ const Landing: React.FC<LandingProps> = ({}) => {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Inzia!
+            Inizia!
           </Button>
         </Form.Item>
       </Form>
