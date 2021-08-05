@@ -7,14 +7,15 @@ import withSession from "../../lib/session";
 import { GetQuizByName } from "../../services/QuizService";
 import { Quiz } from "../../types";
 import Questions from "../../components/questions/Questions";
-import { SaveAnswer, StartQuiz } from "../../services/ContestantService";
+import { GetCheckpoint, StartQuiz } from "../../services/ContestantService";
 
 interface LandingProps {
   user?: string;
   quiz: Quiz;
+  checkpoint?: number;
 }
 
-const Landing: React.FC<LandingProps> = ({ user, quiz }) => {
+const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
   const router = useRouter();
   const { myth } = router.query;
 
@@ -42,7 +43,11 @@ const Landing: React.FC<LandingProps> = ({ user, quiz }) => {
         src="/images/chimera.jpeg"
         style={{ borderRadius: "100%" }}
       />
-      <Questions questions={quiz.quiz} onAnswer={handleAnswer} />
+      <Questions
+        questions={quiz.quiz}
+        onAnswer={handleAnswer}
+        checkpoint={checkpoint}
+      />
       <RegistrationModal user={user} />
     </Layout>
   );
@@ -62,8 +67,11 @@ export const getServerSideProps = withSession(async function ({
   if (user) {
     props.user = user;
     if (quiz) {
-      // TODO: check if already started quiz
-      StartQuiz(user, quiz.slug);
+      const checkpoint = await GetCheckpoint(user, quiz.slug);
+      props.checkpoint = checkpoint;
+      if (!checkpoint) {
+        StartQuiz(user, quiz.slug);
+      }
     }
   }
 
