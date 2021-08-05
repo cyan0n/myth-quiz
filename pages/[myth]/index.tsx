@@ -7,6 +7,7 @@ import withSession from "../../lib/session";
 import { GetQuizByName } from "../../services/QuizService";
 import { Quiz } from "../../types";
 import Questions from "../../components/questions/Questions";
+import { SaveAnswer, StartQuiz } from "../../services/ContestantService";
 
 interface LandingProps {
   user?: string;
@@ -17,10 +18,25 @@ const Landing: React.FC<LandingProps> = ({ user, quiz }) => {
   const router = useRouter();
   const { myth } = router.query;
 
+  const handleAnswer = async (question_Idx: number, answer: any) => {
+    // SaveAnswer(user as string, quiz.slug, question_Idx, answer);
+    await fetch("/api/save_answer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user,
+        quiz: quiz.slug,
+        question: question_Idx,
+        answer,
+      }),
+    });
+  };
+
   return (
     <Layout>
       <Typography.Title>{quiz.name}</Typography.Title>
-      <Typography.Text>{quiz.description}</Typography.Text>
       <Image
         width={200}
         src="/images/chimera.jpeg"
@@ -45,6 +61,9 @@ export const getServerSideProps = withSession(async function ({
 
   if (user) {
     props.user = user;
+    if (quiz) {
+      StartQuiz(user, quiz.slug);
+    }
   }
 
   return { props };
