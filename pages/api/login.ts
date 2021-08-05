@@ -3,6 +3,7 @@ import { Register } from "../../services/ContestantService";
 
 export default withApiSession(async (req, res) => {
   const { user } = await req.body;
+  // TODO: Check if user already exists
   req.session.set("user", user);
   await req.session.save();
   await Register(user);

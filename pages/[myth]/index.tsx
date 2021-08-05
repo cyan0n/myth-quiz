@@ -62,6 +62,7 @@ export const getServerSideProps = withSession(async function ({
   if (user) {
     props.user = user;
     if (quiz) {
+      // TODO: check if already started quiz
       StartQuiz(user, quiz.slug);
     }
   }
