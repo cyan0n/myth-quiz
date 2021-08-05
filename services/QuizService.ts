@@ -24,7 +24,7 @@ export const GetAllQuizzes = async () => {
   return JSON.parse(JSON.stringify(result)) as Quiz[];
 };
 
-export const GetQuizByName = async (name: string) => {
+export const GetOldQuizByName = async (name: string) => {
   const collection = await connectToCollection();
   const result = await collection.findOne({
     slug: new RegExp(`^${name}$`, "i"),
@@ -32,7 +32,7 @@ export const GetQuizByName = async (name: string) => {
   return JSON.parse(JSON.stringify(result)) as Quiz;
 };
 
-export const GetLocalQuizByName = (name: string) => {
-  const result = JSON.parse(JSON.stringify(require("../data/" + name))) as Quiz;
-  return result;
+export const GetQuizByName = async (name: string) => {
+  const result = data.find((quiz) => quiz.slug === name);
+  return JSON.parse(JSON.stringify(result)) as Quiz;
 };
