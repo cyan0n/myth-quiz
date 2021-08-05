@@ -1,25 +1,22 @@
 import { Button, Form, Input, Modal } from "antd";
 import React from "react";
+import Api from "../lib/api";
 
 interface RegistrationModalProps {
   user?: string;
+  onRegister: (user: string) => void;
 }
 
 type RegistrationModalCompoent = React.FC<RegistrationModalProps>;
 
-const RegistrationModal: RegistrationModalCompoent = ({ user }) => {
+const RegistrationModal: RegistrationModalCompoent = ({ user, onRegister }) => {
   const [isVisible, setIsVisible] = React.useState(!user);
 
-  const handleFinish = (values: any) => {
-    fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    })
+  const handleFinish = (values: { user: string }) => {
+    Api.post("login", values)
       .then((response) => {
         setIsVisible(false);
+        onRegister(values.user);
       })
       .catch((error) => console.log("Error", error));
   };

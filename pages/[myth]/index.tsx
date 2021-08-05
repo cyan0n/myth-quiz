@@ -8,6 +8,7 @@ import { GetQuizByName } from "../../services/QuizService";
 import { Quiz } from "../../types";
 import Questions from "../../components/questions/Questions";
 import { GetCheckpoint, StartQuiz } from "../../services/ContestantService";
+import Api from "../../lib/api";
 
 interface LandingProps {
   user?: string;
@@ -20,23 +21,20 @@ const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
   const { myth } = router.query;
 
   const handleAnswer = async (question_Idx: number, answer: any) => {
-    // SaveAnswer(user as string, quiz.slug, question_Idx, answer);
-    await fetch("/api/save_answer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user,
-        quiz: quiz.slug,
-        question: question_Idx,
-        answer,
-      }),
+    await Api.post("save_answer", {
+      user,
+      quiz: quiz.slug,
+      question: question_Idx,
+      answer,
     });
   };
 
   const handleComplete = () => {
     router.push(`${myth}/results`);
+  };
+
+  const handleRegistration = (user: string) => {
+    Api.post("start_quiz", { user, quiz: quiz.slug });
   };
 
   return (
@@ -53,7 +51,7 @@ const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
         checkpoint={checkpoint}
         onComplete={handleComplete}
       />
-      <RegistrationModal user={user} />
+      <RegistrationModal user={user} onRegister={handleRegistration} />
     </PageLayout>
   );
 };
