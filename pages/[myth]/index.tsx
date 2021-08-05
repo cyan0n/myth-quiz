@@ -26,7 +26,7 @@ const Landing: React.FC<LandingProps> = ({ user, quiz }) => {
         src="/images/chimera.jpeg"
         style={{ borderRadius: "100%" }}
       />
-      <Questions questions={quiz.quiz} />
+      <Questions questions={quiz.quiz} onAnswer={handleAnswer} />
       <RegistrationModal user={user} />
     </Layout>
   );

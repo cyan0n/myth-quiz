@@ -11,20 +11,30 @@ import TrueFalseQuestion from "./TrueFalseQuestion";
 
 export interface QuestionProps {
   question: QuestionType;
+  onChange: (value: any) => void;
 }
 
 type QuestionComponent = React.FC<QuestionProps>;
 
-const Question: QuestionComponent = ({ question }) => {
+const Question: QuestionComponent = ({ question, onChange }) => {
+  const handleChange = onChange;
   return (
     <>
       <p>{question.text}</p>
       {question.type === "choice" && (
-        <ChoiceQuestion question={question as ChoiceQuestionType} />
+        <ChoiceQuestion
+          question={question as ChoiceQuestionType}
+          onChange={handleChange}
+        />
       )}
-      {question.type === "truefalse" && <TrueFalseQuestion />}
+      {question.type === "truefalse" && (
+        <TrueFalseQuestion onChange={handleChange} />
+      )}
       {question.type === "sort" && (
-        <SortQuestion question={question as SortQuestionType} />
+        <SortQuestion
+          question={question as SortQuestionType}
+          onChange={handleChange}
+        />
       )}
     </>
   );
