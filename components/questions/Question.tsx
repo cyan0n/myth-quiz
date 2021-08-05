@@ -4,6 +4,7 @@ import {
   ChoiceQuestionType,
   QuestionType,
   SortQuestionType,
+  TrueFalseQuestionType,
 } from "../../types";
 import ChoiceQuestion from "./ChoiceQuestion";
 import SortQuestion from "./SortQuestion";
@@ -28,7 +29,10 @@ const Question: QuestionComponent = ({ question, onChange }) => {
         />
       )}
       {question.type === "truefalse" && (
-        <TrueFalseQuestion onChange={handleChange} />
+        <TrueFalseQuestion
+          onChange={handleChange}
+          question={question as TrueFalseQuestionType}
+        />
       )}
       {question.type === "sort" && (
         <SortQuestion

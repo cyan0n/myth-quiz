@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { SortQuestionType } from "../../types";
 import ToggleButton from "../ToggleButton";
 import { useSet, useUpdateEffect } from "ahooks";
@@ -11,18 +11,28 @@ export interface SortQuestionProps {
 export type SortQuestionComponent = React.FC<SortQuestionProps>;
 
 const SortQuestion: SortQuestionComponent = ({ question, onChange }) => {
-  const [set, { add, remove }] = useSet<string>([]);
+  const [set, { add, remove, reset }] = useSet<string>([]);
+  const [refresh, setRefresh] = useState<number>(0);
   const handleToggle = (value: boolean, choice: string) => {
     value ? add(choice) : remove(choice);
   };
+
   useUpdateEffect(() => {
-    onChange(Array.from(set.values()));
+    if (set.size === question.order.length) {
+      onChange(Array.from(set.values()));
+    }
   }, [set]);
+
+  useUpdateEffect(() => {
+    setRefresh(refresh + 1);
+    reset();
+  }, [question]);
+
   return (
     <>
       {question.order.map((choice, choice_Idx) => (
         <ToggleButton
-          key={`${choice_Idx}`}
+          key={`${refresh}${choice_Idx}`}
           onToggle={(value) => {
             handleToggle(value, choice);
           }}

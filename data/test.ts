@@ -12,10 +12,27 @@ export default {
       answer: 3,
     },
     {
+      type: "choice",
+      text: "Multiple choice question",
+      choices: ["Answer 0", "Answer 1", "Answer 2", "Answer 3"],
+      answer: 3,
+    },
+    {
       type: "truefalse",
       text: "True or False question",
       image: "chimera.jpg",
       answer: true,
+    },
+    {
+      type: "truefalse",
+      text: "True or False question",
+      image: "chimera.jpg",
+      answer: true,
+    },
+    {
+      type: "sort",
+      text: "Sorting question",
+      order: ["First", "Second", "Third", "Fourth"],
     },
     {
       type: "sort",
