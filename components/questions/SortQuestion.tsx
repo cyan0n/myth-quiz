@@ -6,7 +6,7 @@ import { useSet, useUpdateEffect } from "ahooks";
 
 export interface SortQuestionProps {
   question: SortQuestionType;
-  onChange: (value: string[]) => void;
+  onChange: (value: string[] | null) => void;
 }
 export type SortQuestionComponent = React.FC<SortQuestionProps>;
 
@@ -20,6 +20,8 @@ const SortQuestion: SortQuestionComponent = ({ question, onChange }) => {
   useUpdateEffect(() => {
     if (set.size === question.order.length) {
       onChange(Array.from(set.values()));
+    } else {
+      onChange(null);
     }
   }, [set]);
 
