@@ -1,6 +1,6 @@
 import { Button, Form, Image, Input, Modal, Typography } from "antd";
 import React from "react";
-import Layout from "../../components/Layout";
+import PageLayout from "../../components/PageLayout";
 import { useRouter } from "next/router";
 import RegistrationModal from "../../components/RegistrationModal";
 import withSession from "../../lib/session";
@@ -35,8 +35,12 @@ const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
     });
   };
 
+  const handleComplete = () => {
+    router.push(`${myth}/results`);
+  };
+
   return (
-    <Layout>
+    <PageLayout>
       <Typography.Title>{quiz.name}</Typography.Title>
       <Image
         width={200}
@@ -47,9 +51,10 @@ const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
         questions={quiz.quiz}
         onAnswer={handleAnswer}
         checkpoint={checkpoint}
+        onComplete={handleComplete}
       />
       <RegistrationModal user={user} />
-    </Layout>
+    </PageLayout>
   );
 };
 

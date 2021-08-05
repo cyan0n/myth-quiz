@@ -1,14 +1,14 @@
 import React from "react";
-import Layout from "../components/Layout";
+import PageLayout from "../components/PageLayout";
 import StepsNumbersHorizontal from "../components/steps/stepsNumbersHorizontal";
 
 interface QuizProps {}
 
 const Quiz: React.FC<QuizProps> = ({}) => {
   return (
-    <Layout>
+    <PageLayout>
       <StepsNumbersHorizontal />
-    </Layout>
+    </PageLayout>
   );
 };
 

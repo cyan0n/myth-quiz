@@ -1,5 +1,5 @@
 import { useCounter } from "ahooks";
-import { Space, Steps, Card, Button } from "antd";
+import { Space, Steps, Card, Button, Progress } from "antd";
 import React, { useEffect, useState } from "react";
 import { SaveAnswer } from "../../services/ContestantService";
 import { QuestionType } from "../../types";
@@ -9,6 +9,7 @@ export interface QuestionsProps {
   checkpoint?: number;
   questions: QuestionType[];
   onAnswer: (question_Idx: number, answer: any) => void | Promise<void>;
+  onComplete: () => void;
 }
 
 type QuestionsComponent = React.FC<QuestionsProps>;
@@ -17,12 +18,13 @@ const Questions: QuestionsComponent = ({
   checkpoint = 0,
   questions,
   onAnswer,
+  onComplete,
 }) => {
   const [step, { inc: nextStep, dec: prevStep, set: setStep }] = useCounter(
     checkpoint,
     {
       min: 0,
-      max: questions.length - 1,
+      max: questions.length,
     },
   );
   const [current, setCurrent] = useState<QuestionType>(questions[step]);
@@ -32,19 +34,25 @@ const Questions: QuestionsComponent = ({
     setCurrent(questions[step]);
     setCurrentValue(null);
   }, [step]);
+  useEffect(() => {
+    console.log(step);
+    if (step === questions.length) {
+      onComplete();
+    }
+  }, []);
 
   const handleClick = async () => {
     await onAnswer(step, currentValue);
-    nextStep();
+    if (step < questions.length - 1) {
+      nextStep();
+    } else {
+      onComplete();
+    }
   };
 
   return (
     <Space direction="vertical">
-      <Steps current={step} progressDot size="default">
-        {[...Array(questions.length)].map((_, i) => (
-          <Steps.Step key={`step_${i}`} onClick={() => setStep(i)} />
-        ))}
-      </Steps>
+      <Progress percent={(step / questions.length) * 100} showInfo={false} />
       <Card
         actions={[
           <Button
@@ -56,7 +64,7 @@ const Questions: QuestionsComponent = ({
           </Button>,
         ]}
       >
-        <Question question={current} onChange={setCurrentValue} />
+        {current && <Question question={current} onChange={setCurrentValue} />}
       </Card>
     </Space>
   );
