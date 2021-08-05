@@ -41,6 +41,24 @@ export const SaveAnswer = async (
   );
 };
 
+export const GetQuizAnswers = async (user: string, quiz: string) => {
+  const collection = await connectToCollection();
+  const result = (await collection.findOne({ user: user })) as Contestant;
+  return result.answers?.[quiz];
+};
+
+export const SaveQuizScore = async (
+  user: string,
+  quiz: string,
+  score: number,
+) => {
+  const collection = await connectToCollection();
+  await collection.updateOne(
+    { user: user },
+    { $set: { [`answers.${quiz}.score`]: score } },
+  );
+};
+
 export const GetCheckpoint = async (user: string, quiz: string) => {
   const collection = await connectToCollection();
   const result = (await collection.findOne({ user: user })) as Contestant;
