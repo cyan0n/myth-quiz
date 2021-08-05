@@ -1,8 +1,10 @@
-import withSession from "../../lib/session";
+import { withApiSession } from "../../lib/session";
+import { Register } from "../../services/Contestant";
 
-export default withSession(async ({ req, res }) => {
+export default withApiSession(async (req, res) => {
   const { user } = await req.body;
   req.session.set("user", user);
   await req.session.save();
+  await Register(user);
   res.json({ user });
 });
