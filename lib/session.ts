@@ -14,7 +14,7 @@ export type NextIronHandler = ({
   req: NextIronRequest;
   res: NextApiResponse;
   params: any;
-}) => void | Promise<void>;
+}) => any | Promise<any>;
 
 const withSession = (handler: NextIronHandler) =>
   withIronSession(handler, {
