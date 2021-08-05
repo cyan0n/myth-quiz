@@ -17,7 +17,8 @@ export default {
     {
       type: "sort",
       text: "Ricomponi il nome della principessa",
-      order: ["Nayota", "ke no", "Kagu", "ya-hime"],
+      order: ["Kagu", "ke no", "ya-hime", "Nayota"],
+      answer: ["Nayota", "ke no", "Kagu", "ya-hime"],
     },
     {
       type: "choice",

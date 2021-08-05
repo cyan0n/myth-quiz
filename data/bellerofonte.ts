@@ -38,7 +38,8 @@ export default {
     {
       type: "sort",
       text: "Metti in ordine le persone incontrate da Bellerofonte",
-      order: ["Bellero", "Preto", "Iobate", "Atena"],
+      order: ["Bellero", "Atena", "Preto", "Iobate"],
+      answer: ["Bellero", "Preto", "Iobate", "Atena"],
     },
     {
       type: "truefalse",

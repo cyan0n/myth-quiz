@@ -6,7 +6,8 @@ export default {
     {
       type: "sort",
       text: "Componi nell'ordine giusto il nome del Serpente Piumato",
-      order: ["quetz", "al", "co", "atl"],
+      order: ["quetz", "co", "atl", "al"],
+      answer: ["quetz", "al", "co", "atl"],
     },
     {
       type: "choice",
@@ -38,7 +39,8 @@ export default {
     {
       type: "sort",
       text: "Componi nell'ordine giusto il nome del fratello del Serpente Piumato",
-      order: ["tez", "cat", "lipo", "ca"],
+      order: ["lipo", "tez", "ca", "cat"],
+      answer: ["tez", "cat", "lipo", "ca"],
     },
     {
       type: "truefalse",

@@ -29,6 +29,12 @@ export default {
       type: "sort",
       text: "Metti in ordine gli eventi",
       order: [
+        "Odino vuole in dono il cavallo",
+        "Svadilfari scappa per amore",
+        "Tutti danno la colpa a Loki",
+        "Asgard ha bisogno di difese",
+      ],
+      answer: [
         "Asgard ha bisogno di difese",
         "Tutti danno la colpa a Loki",
         "Svadilfari scappa per amore",

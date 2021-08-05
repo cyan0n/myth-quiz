@@ -24,6 +24,12 @@ export default {
       type: "sort",
       text: "Metti in ordine i seguenti eventi:",
       order: [
+        "Psiche viene presa da Zefiro",
+        "Eros chiede al padre degli dei di essere ricongiunto con Psiche",
+        "Venere è gelosa di Psiche",
+        "Psiche illumina il volto di Eros",
+      ],
+      answer: [
         "Venere è gelosa di Psiche",
         "Psiche viene presa da Zefiro",
         "Psiche illumina il volto di Eros",

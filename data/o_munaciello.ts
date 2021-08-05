@@ -33,7 +33,13 @@ export default {
     {
       type: "sort",
       text: "Ricomponi il proverbio:",
-      order: ["O Munaciello:", "a chi arricchisce", "e", "a chi appezzentisce"],
+      order: ["a chi arricchisce", "a chi appezzentisce", "e", "O Munaciello:"],
+      answer: [
+        "O Munaciello:",
+        "a chi arricchisce",
+        "e",
+        "a chi appezzentisce",
+      ],
     },
     {
       type: "choice",

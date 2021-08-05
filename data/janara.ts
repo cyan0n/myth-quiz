@@ -46,6 +46,12 @@ export default {
       text: "Metti in ordine, dalla più potente alla meno, le cose che sconfiggono una Janara",
       order: [
         "Luce del sole",
+        "fierr' e acciaij",
+        "Scopa di miglio capovolta e grani di sale",
+        "La consapevolezza di essere una strega",
+      ],
+      answer: [
+        "Luce del sole",
         "Scopa di miglio capovolta e grani di sale",
         "fierr' e acciaij",
         "La consapevolezza di essere una strega",

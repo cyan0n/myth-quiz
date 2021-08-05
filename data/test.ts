@@ -32,12 +32,14 @@ export default {
     {
       type: "sort",
       text: "Sorting question",
-      order: ["First", "Second", "Third", "Fourth"],
+      order: ["Second", "First", "Fourth", "Third"],
+      answer: ["First", "Second", "Third", "Fourth"],
     },
     {
       type: "sort",
       text: "Sorting question",
-      order: ["First", "Second", "Third", "Fourth"],
+      order: ["Fourth", "Second", "Third", "First"],
+      answer: ["First", "Second", "Third", "Fourth"],
     },
   ],
 };
