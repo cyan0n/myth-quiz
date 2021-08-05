@@ -29,7 +29,8 @@ const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
     });
   };
 
-  const handleComplete = () => {
+  const handleComplete = async () => {
+    await Api.post("calculate", { user, quiz: quiz.slug });
     router.push(`${myth}/results`);
   };
 
