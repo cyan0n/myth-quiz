@@ -60,7 +60,7 @@ const Questions: QuestionsComponent = ({
             onClick={handleClick}
             disabled={currentValue === null}
           >
-            Next
+            Avanti
           </Button>,
         ]}
       >
