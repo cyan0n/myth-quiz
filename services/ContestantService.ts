@@ -28,8 +28,14 @@ const connectToBothCollections = async () => {
 };
 
 export const Register = async (user: User) => {
-  const collection = await connectToCollection();
-  await collection.insertOne({ user: user, answers: {} });
+  const { answers, scores } = await connectToBothCollections();
+  await Promise.all([
+    answers.insertOne({ user: user, answers: {} }),
+    scores.updateOne(
+      { quiz: "total" },
+      { $push: { scores: { user: user, score: 0 } } },
+    ),
+  ]);
 };
 
 export const StartQuiz = async (user: User, quiz: string) => {
@@ -77,6 +83,10 @@ export const SaveQuizScore = async (
       { quiz: quiz },
       { $push: { scores: { user: user, score: score } } },
     ),
+    scores.updateOne(
+      { quiz: "total", score: { $elemMatch: { user: user } } },
+      { $inc: { "scores.$": { score: score } } },
+    ),
   ]);
 };
 export interface Ladder {
@@ -87,10 +97,11 @@ export interface Score {
   user: User;
   score: number;
 }
+
 export const GetQuizLadder = async (quiz: string) => {
   const { scores } = await connectToBothCollections();
   const result = (await scores.findOne({ quiz: quiz })) as Ladder;
-  return result.scores as Score[];
+  return (result.scores as Score[]).sort((a, b) => b.score - a.score);
 };
 
 export const Reset = async () => {
