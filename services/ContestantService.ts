@@ -1,6 +1,9 @@
 import { connectToDatabase } from "../lib/mongodb";
 import { Db } from "mongodb";
 
+import data from "../data";
+import { Quiz } from "../types";
+
 interface Contestant {
   user: string;
   answers?: {
@@ -13,6 +16,13 @@ interface Contestant {
 const connectToCollection = async () => {
   const { db }: { db: Db } = await connectToDatabase();
   return db.collection("answers");
+};
+
+const connectToBothCollections = async () => {
+  const { db }: { db: Db } = await connectToDatabase();
+  const answers = await db.collection("answers");
+  const scores = await db.collection("score");
+  return { scores, answers };
 };
 
 export const Register = async (user: string) => {
@@ -52,11 +62,25 @@ export const SaveQuizScore = async (
   quiz: string,
   score: number,
 ) => {
-  const collection = await connectToCollection();
-  await collection.updateOne(
+  const { answers, scores } = await connectToBothCollections();
+  await answers.updateOne(
     { user: user },
     { $set: { [`answers.${quiz}.score`]: score } },
   );
+  await scores.updateOne(
+    { quiz: quiz },
+    { $push: { scores: { user: user, score: score } } },
+  );
+};
+
+export const Reset = async () => {
+  const { answers, scores } = await connectToBothCollections();
+  scores.deleteMany({});
+  const myth_list = data.map((quiz: Quiz) => {
+    return { quiz: quiz.slug, scores: [] };
+  });
+  await answers.deleteMany({});
+  await scores.insertMany(myth_list);
 };
 
 export const GetCheckpoint = async (user: string, quiz: string) => {

@@ -1,14 +1,13 @@
-import { StartQuiz } from "../../services/ContestantService";
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
+import { Reset } from "../../services/ContestantService";
 
 const handler = nc<NextApiRequest, NextApiResponse>();
 
-handler.post<NextApiRequest, NextApiResponse>(
+handler.get<NextApiRequest, NextApiResponse>(
   async (req: NextApiRequest, res: NextApiResponse) => {
-    const { user, quiz } = req.body;
-    await StartQuiz(user, quiz);
-    res.status(200).json({ hello: "world" });
+    await Reset();
+    res.status(200).json({ success: true });
   },
 );
 

@@ -25,7 +25,7 @@ handler.post<NextApiRequest, NextApiResponse>(
     });
     await SaveQuizScore(user, quiz, score);
     res.status(200).json({ score });
-  }
+  },
 );
 
 export default handler;
