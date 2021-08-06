@@ -16,7 +16,11 @@ const ToggleButton: ToggleButtonComponent = ({ children, onToggle }) => {
   }, [value]);
 
   return (
-    <Button type={value ? "primary" : "default"} onClick={() => toggle()}>
+    <Button
+      type={value ? "primary" : "default"}
+      onClick={() => toggle()}
+      style={{ whiteSpace: "normal", height: "auto" }}
+    >
       {children}
     </Button>
   );

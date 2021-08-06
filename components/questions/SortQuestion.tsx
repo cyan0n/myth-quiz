@@ -46,7 +46,10 @@ const SortQuestion: SortQuestionComponent = ({ question, onChange }) => {
       </Space>
       <Space direction="horizontal" wrap={true}>
         {Array.from(set.values()).map((choice, choice_Idx) => (
-          <Tag key={choice_Idx}>
+          <Tag
+            key={choice_Idx}
+            style={{ whiteSpace: "normal", height: "auto" }}
+          >
             {choice_Idx + 1}: {choice}
           </Tag>
         ))}
