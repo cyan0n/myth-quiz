@@ -19,6 +19,7 @@ const ToggleButton: ToggleButtonComponent = ({ children, onToggle }) => {
     <Button
       type={value ? "primary" : "default"}
       onClick={() => toggle()}
+      className="w-full"
       style={{ whiteSpace: "normal", height: "auto" }}
     >
       {children}

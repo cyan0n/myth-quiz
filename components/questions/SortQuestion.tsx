@@ -31,8 +31,8 @@ const SortQuestion: SortQuestionComponent = ({ question, onChange }) => {
   }, [question]);
 
   return (
-    <Space direction="vertical">
-      <Space direction="vertical">
+    <Space direction="vertical" className="w-full">
+      <Space direction="vertical" className="w-full">
         {question.order.map((choice, choice_Idx) => (
           <ToggleButton
             key={`${refresh}${choice_Idx}`}
@@ -44,11 +44,12 @@ const SortQuestion: SortQuestionComponent = ({ question, onChange }) => {
           </ToggleButton>
         ))}
       </Space>
-      <Space direction="horizontal" wrap={true}>
+      <Space direction="horizontal" wrap={true} className="w-full">
         {Array.from(set.values()).map((choice, choice_Idx) => (
           <Tag
             key={choice_Idx}
             style={{ whiteSpace: "normal", height: "auto" }}
+            className="w-full"
           >
             {choice_Idx + 1}: {choice}
           </Tag>

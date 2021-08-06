@@ -22,8 +22,13 @@ const TrueFalseQuestion: TrueFalseQuestionComponent = ({
   }, [question]);
 
   return (
-    <Radio.Group buttonStyle="solid" onChange={handleChange} value={value}>
-      <Space align="center">
+    <Radio.Group
+      buttonStyle="solid"
+      onChange={handleChange}
+      value={value}
+      className="w-full"
+    >
+      <Space className="w-full justify-center">
         <Radio.Button value={true} onClick={() => setValue(true)}>
           Vero
         </Radio.Button>

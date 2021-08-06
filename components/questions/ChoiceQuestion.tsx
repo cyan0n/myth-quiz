@@ -19,20 +19,25 @@ const ChoiceQuestion: ChoiceQuestionComponent = ({ question, onChange }) => {
   }, [question]);
 
   return (
-
-      <Radio.Group buttonStyle="solid" onChange={handleChange} value={value}>
-        <Space direction="vertical">
+    <Radio.Group
+      buttonStyle="solid"
+      onChange={handleChange}
+      value={value}
+      style={{ width: "100%" }}
+    >
+      <Space direction="vertical" style={{ width: "100%" }}>
         {question.choices.map((choice, choice_Idx) => (
-            <Radio.Button
-              key={choice_Idx}
-              value={choice_Idx}
-              onClick={() => setValue(choice_Idx)}
-            >
-              {choice}
-            </Radio.Button>
+          <Radio.Button
+            key={choice_Idx}
+            value={choice_Idx}
+            onClick={() => setValue(choice_Idx)}
+            style={{ width: "100%", textAlign: "center" }}
+          >
+            {choice}
+          </Radio.Button>
         ))}
-        </Space>
-      </Radio.Group>
+      </Space>
+    </Radio.Group>
   );
 };
 
