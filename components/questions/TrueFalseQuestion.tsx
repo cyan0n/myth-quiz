@@ -1,5 +1,5 @@
 import { useUpdateEffect } from "ahooks";
-import { Radio, RadioChangeEvent } from "antd";
+import { Radio, RadioChangeEvent, Space } from "antd";
 import React from "react";
 import { TrueFalseQuestionType } from "../../types";
 
@@ -23,12 +23,14 @@ const TrueFalseQuestion: TrueFalseQuestionComponent = ({
 
   return (
     <Radio.Group buttonStyle="solid" onChange={handleChange} value={value}>
-      <Radio.Button value={true} onClick={() => setValue(true)}>
-        Vero
-      </Radio.Button>
-      <Radio.Button value={false} onClick={() => setValue(false)}>
-        Falso
-      </Radio.Button>
+      <Space align="center">
+        <Radio.Button value={true} onClick={() => setValue(true)}>
+          Vero
+        </Radio.Button>
+        <Radio.Button value={false} onClick={() => setValue(false)}>
+          Falso
+        </Radio.Button>
+      </Space>
     </Radio.Group>
   );
 };
