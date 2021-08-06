@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 import RegistrationModal from "../../components/RegistrationModal";
 import withSession from "../../lib/session";
 import { GetQuizByName } from "../../services/QuizService";
-import { Quiz } from "../../types";
+import { Quiz, User } from "../../types";
 import Questions from "../../components/questions/Questions";
 import { GetCheckpoint, StartQuiz } from "../../services/ContestantService";
 import Api from "../../lib/api";
 
 interface LandingProps {
-  user?: string;
+  user?: User;
   quiz: Quiz;
   checkpoint?: number;
 }
@@ -19,7 +19,7 @@ interface LandingProps {
 const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
   const router = useRouter();
   const { myth } = router.query;
-  const [_user, setUser] = useState<string | undefined>(user);
+  const [_user, setUser] = useState<User | undefined>(user);
 
   const handleAnswer = async (question_Idx: number, answer: any) => {
     await Api.post("save_answer", {
@@ -35,7 +35,7 @@ const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
     router.push(`${myth}/results`);
   };
 
-  const handleRegistration = (user: string) => {
+  const handleRegistration = (user: User) => {
     Api.post("start_quiz", { user, quiz: quiz.slug });
     setUser(user);
   };
@@ -68,7 +68,7 @@ export const getServerSideProps = withSession(async function ({
   const props: LandingProps = {
     quiz,
   };
-  const user = req.session.get("user");
+  const user: User | undefined = req.session.get("user");
 
   if (user) {
     props.user = user;

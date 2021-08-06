@@ -1,10 +1,11 @@
 import { Button, Form, Input, Modal } from "antd";
 import React from "react";
 import Api from "../lib/api";
+import { User } from "../types";
 
 interface RegistrationModalProps {
-  user?: string;
-  onRegister: (user: string) => void;
+  user?: User;
+  onRegister: (user: User) => void;
 }
 
 type RegistrationModalCompoent = React.FC<RegistrationModalProps>;
@@ -16,7 +17,7 @@ const RegistrationModal: RegistrationModalCompoent = ({ user, onRegister }) => {
     Api.post("login", values)
       .then((response) => {
         setIsVisible(false);
-        onRegister(values.user);
+        onRegister(response.user);
       })
       .catch((error) => console.log("Error", error));
   };

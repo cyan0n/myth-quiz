@@ -3,15 +3,18 @@ import React from "react";
 import PageLayout from "../../components/PageLayout";
 import { GetQuizLadder, Score } from "../../services/ContestantService";
 import withSession from "../../lib/session";
+import { User } from "../../types";
 
 export interface MythResultsProps {
   ladder: Score[];
-  user: string;
+  user: User;
 }
 type MythResultsComponent = React.FC<MythResultsProps>;
 
 const MythResults: MythResultsComponent = ({ ladder, user }) => {
-  const personal = ladder.find((score) => score.user == user);
+  const personal = ladder.find(
+    (score) => JSON.stringify(score.user) == JSON.stringify(user),
+  );
   return (
     <PageLayout>
       <Tabs defaultActiveKey="1" type="card" size="large">
@@ -21,8 +24,8 @@ const MythResults: MythResultsComponent = ({ ladder, user }) => {
         <Tabs.TabPane tab="Ladder" key="2">
           <h1>Results</h1>
           {ladder.map((score) => (
-            <h1 key={score.user}>
-              {score.user}: {score.score}
+            <h1 key={score.user.id}>
+              {score.user.name}: {score.score}
             </h1>
           ))}
         </Tabs.TabPane>
@@ -34,7 +37,7 @@ const MythResults: MythResultsComponent = ({ ladder, user }) => {
 
 export const getServerSideProps = withSession(
   async ({ req, res, params: { myth } }) => {
-    const user = req.session.get("user");
+    const user: User | undefined = req.session.get("user");
     if (user) {
       const ladder = (await GetQuizLadder(myth)).sort(
         (a, b) => b.score - a.score,
