@@ -27,14 +27,14 @@ export default {
     },
     {
       type: "choice",
-      text: "Ch' tien'n man'?",
+      text: "Cos’è una Janara?",
       choices: [
-        "fierr' e scop'migli",
-        "fierr' e pugn",
-        "fieer' e acciai",
-        "fierr' e acciaij",
+        "Una sacerdotessa",
+        "Una porta",
+        "Una strega",
+        "Una scopa di miglio",
       ],
-      answer: 3,
+      answer: 2,
     },
     {
       type: "truefalse",

@@ -38,14 +38,14 @@ const MythResults: MythResultsComponent = ({ ladder, user }) => {
 export const getServerSideProps = withSession(
   async ({ req, res, params: { myth } }) => {
     const user: User | undefined = req.session.get("user");
-    if (user) {
-      const ladder = (await GetQuizLadder(myth)).sort(
-        (a, b) => b.score - a.score,
-      );
+    const ladder = await GetQuizLadder(myth);
+    if (
+      user &&
+      ladder.find((score) => JSON.stringify(score.user) == JSON.stringify(user))
+    ) {
       return { props: { ladder, user } };
     } else {
-      // TODO: redirect to quiz page
-      return { props: {} };
+      return { redirect: { permanent: true, destination: `/${myth}` } };
     }
   },
 );

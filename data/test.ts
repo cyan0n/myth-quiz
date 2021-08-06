@@ -38,8 +38,18 @@ export default {
     {
       type: "sort",
       text: "Sorting question",
-      order: ["Fourth", "Second", "Third", "First"],
-      answer: ["First", "Second", "Third", "Fourth"],
+      order: [
+        "First of many and few",
+        "Secondas das  da",
+        "Thirddsad asd as",
+        "Fourthd d sasd a dasasd",
+      ],
+      answer: [
+        "First of many and few",
+        "Secondas das  da",
+        "Thirddsad asd as",
+        "Fourthd d sasd a dasasd",
+      ],
     },
   ],
 };
