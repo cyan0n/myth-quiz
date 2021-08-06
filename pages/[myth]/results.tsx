@@ -37,7 +37,7 @@ const MythResults: MythResultsComponent = ({ ladder, user, quiz }) => {
           </Typography.Title>
         </Tabs.TabPane>
         <Tabs.TabPane tab="Ladder" key="2" style={{ textAlign: "center" }}>
-          <h1>Results</h1>
+          <Typography.Title level={3}>Classifica</Typography.Title>
           <LeaderBoard ladder={ladder} />
         </Tabs.TabPane>
       </Tabs>
