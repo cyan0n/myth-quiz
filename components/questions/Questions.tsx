@@ -35,7 +35,6 @@ const Questions: QuestionsComponent = ({
     setCurrentValue(null);
   }, [step]);
   useEffect(() => {
-    console.log(step);
     if (step === questions.length) {
       onComplete();
     }
@@ -54,6 +53,7 @@ const Questions: QuestionsComponent = ({
     <Space direction="vertical">
       <Progress percent={(step / questions.length) * 100} showInfo={false} />
       <Card
+        style={{ width: "95vw" }}
         actions={[
           <Button
             type="primary"
