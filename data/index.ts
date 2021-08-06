@@ -1,5 +1,6 @@
 import { Quiz } from "../types";
 
+import bellerofonte from "./bellerofonte";
 import chang_e from "./chang_e";
 import el_cocay from "./el_cocay";
 import eros_psiche from "./eros_psiche";
@@ -11,6 +12,7 @@ import sleipnir from "./sleipnir";
 import test from "./test";
 
 export default [
+  bellerofonte,
   chang_e,
   el_cocay,
   eros_psiche,

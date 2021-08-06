@@ -43,7 +43,7 @@ const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
       <Typography.Title>{quiz.name}</Typography.Title>
       <Image
         width={200}
-        src="/images/chimera.jpeg"
+        src={`/images/${quiz.slug}.png`}
         style={{ borderRadius: "100%" }}
       />
       <Questions

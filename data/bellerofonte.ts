@@ -1,5 +1,6 @@
 export default {
   name: "Bellerofonte e la Chimera",
+  slug: "bellerofonte_chimera",
   image: "",
   quiz: [
     {
