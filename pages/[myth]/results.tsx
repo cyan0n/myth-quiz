@@ -1,10 +1,11 @@
-import { Space, Tabs, Typography } from "antd";
+import { Button, Space, Tabs, Typography } from "antd";
 import React from "react";
 import PageLayout from "../../components/PageLayout";
 import { GetQuizLadder, Score } from "../../services/ContestantService";
 import withSession from "../../lib/session";
 import { User } from "../../types";
 import LeaderBoard from "../../components/LeaderBoard";
+import AnchorLink from "antd/lib/anchor/AnchorLink";
 
 export interface MythResultsProps {
   ladder: Score[];
@@ -35,6 +36,9 @@ const MythResults: MythResultsComponent = ({ ladder, user, quiz }) => {
             <Typography.Title level={3}>su</Typography.Title>
             54
           </Typography.Title>
+          <Button href="/results" type="primary">
+            Risultati Globali
+          </Button>
         </Tabs.TabPane>
         <Tabs.TabPane tab="Ladder" key="2" style={{ textAlign: "center" }}>
           <Typography.Title level={3}>Classifica</Typography.Title>
