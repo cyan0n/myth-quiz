@@ -84,8 +84,9 @@ export const SaveQuizScore = async (
       { $push: { scores: { user: user, score: score } } },
     ),
     scores.updateOne(
-      { quiz: "total", score: { $elemMatch: { user: user } } },
-      { $inc: { "scores.$": { score: score } } },
+      { quiz: "total" },
+      { $inc: { "scores.$[index].score": score } },
+      { arrayFilters: [{ "index.user": user }] },
     ),
   ]);
 };
