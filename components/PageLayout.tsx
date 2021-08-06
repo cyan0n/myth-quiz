@@ -11,7 +11,13 @@ export default function PageLayout({
   return (
     <Layout style={{ height: "100vh" }}>
       <Layout.Header>Header</Layout.Header>
-      <Layout.Content style={{ display: "flex", justifyContent: "center" }}>
+      <Layout.Content
+        style={{
+          paddingTop: "2rem",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <Space direction="vertical" align="center">
           {children}
         </Space>

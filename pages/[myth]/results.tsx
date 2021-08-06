@@ -1,33 +1,44 @@
-import { Space, Tabs } from "antd";
+import { Space, Tabs, Typography } from "antd";
 import React from "react";
 import PageLayout from "../../components/PageLayout";
 import { GetQuizLadder, Score } from "../../services/ContestantService";
 import withSession from "../../lib/session";
 import { User } from "../../types";
+import LeaderBoard from "../../components/LeaderBoard";
 
 export interface MythResultsProps {
   ladder: Score[];
   user: User;
+  quiz: string;
 }
 type MythResultsComponent = React.FC<MythResultsProps>;
 
-const MythResults: MythResultsComponent = ({ ladder, user }) => {
+const MythResults: MythResultsComponent = ({ ladder, user, quiz }) => {
   const personal = ladder.find(
     (score) => JSON.stringify(score.user) == JSON.stringify(user),
   );
   return (
     <PageLayout>
-      <Tabs defaultActiveKey="1" type="card" size="large">
-        <Tabs.TabPane tab="Score" key="1">
-          {personal?.score}
+      <Tabs
+        defaultActiveKey="1"
+        type="card"
+        size="large"
+        style={{ width: "100vw", height: "100vh" }}
+        centered
+      >
+        <Tabs.TabPane tab="Score" key="1" style={{ textAlign: "center" }}>
+          <Typography.Title level={3}>
+            Il tuo punteggio sul Quiz é:
+          </Typography.Title>
+          <Typography.Title>
+            {personal?.score}
+            <Typography.Title level={3}>su</Typography.Title>
+            54
+          </Typography.Title>
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Ladder" key="2">
+        <Tabs.TabPane tab="Ladder" key="2" style={{ textAlign: "center" }}>
           <h1>Results</h1>
-          {ladder.map((score) => (
-            <h1 key={score.user.id}>
-              {score.user.name}: {score.score}
-            </h1>
-          ))}
+          <LeaderBoard ladder={ladder} />
         </Tabs.TabPane>
       </Tabs>
       <Space direction="vertical"></Space>
@@ -43,7 +54,7 @@ export const getServerSideProps = withSession(
       user &&
       ladder.find((score) => JSON.stringify(score.user) == JSON.stringify(user))
     ) {
-      return { props: { ladder, user } };
+      return { props: { ladder, user, quiz: myth } };
     } else {
       return { redirect: { permanent: true, destination: `/${myth}` } };
     }
