@@ -11,7 +11,10 @@ export interface LadderPageProps {
 export type LadderPageComponent = React.FC<LadderPageProps>;
 
 const LadderPage: LadderPageComponent = ({ user, ladder }) => {
-  return <PageLayout>Ladder</PageLayout>;
+  const personal = ladder.find(
+    (score) => JSON.stringify(score.user) == JSON.stringify(user),
+  );
+  return <PageLayout>Ladder {personal?.score}</PageLayout>;
 };
 
 export const getServerSideProps = withSession(async ({ req, res }) => {
