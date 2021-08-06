@@ -20,8 +20,10 @@ const connectToCollection = async () => {
 
 const connectToBothCollections = async () => {
   const { db }: { db: Db } = await connectToDatabase();
-  const answers = await db.collection("answers");
-  const scores = await db.collection("score");
+  const [answers, scores] = await Promise.all([
+    db.collection("answers"),
+    db.collection("score"),
+  ]);
   return { scores, answers };
 };
 
@@ -63,14 +65,29 @@ export const SaveQuizScore = async (
   score: number,
 ) => {
   const { answers, scores } = await connectToBothCollections();
-  await answers.updateOne(
-    { user: user },
-    { $set: { [`answers.${quiz}.score`]: score } },
-  );
-  await scores.updateOne(
-    { quiz: quiz },
-    { $push: { scores: { user: user, score: score } } },
-  );
+  await Promise.all([
+    answers.updateOne(
+      { user: user },
+      { $set: { [`answers.${quiz}.score`]: score } },
+    ),
+    scores.updateOne(
+      { quiz: quiz },
+      { $push: { scores: { user: user, score: score } } },
+    ),
+  ]);
+};
+export interface Ladder {
+  quiz: string;
+  scores: Score[];
+}
+export interface Score {
+  user: string;
+  score: number;
+}
+export const GetQuizLadder = async (quiz: string) => {
+  const { scores } = await connectToBothCollections();
+  const result = (await scores.findOne({ quiz: quiz })) as Ladder;
+  return result.scores as Score[];
 };
 
 export const Reset = async () => {
