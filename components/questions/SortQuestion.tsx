@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Space, Tag } from "antd";
 import React, { useState } from "react";
 import { SortQuestionType } from "../../types";
 import ToggleButton from "../ToggleButton";
@@ -31,21 +31,25 @@ const SortQuestion: SortQuestionComponent = ({ question, onChange }) => {
   }, [question]);
 
   return (
-    <>
-      {question.order.map((choice, choice_Idx) => (
-        <ToggleButton
-          key={`${refresh}${choice_Idx}`}
-          onToggle={(value) => {
-            handleToggle(value, choice);
-          }}
-        >
-          {choice}
-        </ToggleButton>
-      ))}
-      {Array.from(set.values()).map((choice, choice_Idx) => (
-        <p key={choice_Idx}>{choice}</p>
-      ))}
-    </>
+    <Space direction="vertical">
+      <Space direction="horizontal">
+        {Array.from(set.values()).map((choice, choice_Idx) => (
+          <Tag key={choice_Idx}>{choice}</Tag>
+        ))}
+      </Space>
+      <Space direction="horizontal">
+        {question.order.map((choice, choice_Idx) => (
+          <ToggleButton
+            key={`${refresh}${choice_Idx}`}
+            onToggle={(value) => {
+              handleToggle(value, choice);
+            }}
+          >
+            {choice}
+          </ToggleButton>
+        ))}
+      </Space>
+    </Space>
   );
 };
 
