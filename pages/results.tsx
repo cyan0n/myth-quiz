@@ -17,7 +17,7 @@ const LadderPage: LadderPageComponent = ({ user, ladder }) => {
     (score) => JSON.stringify(score.user) == JSON.stringify(user),
   );
   return (
-    <PageLayout>
+    <PageLayout user={user}>
       <Tabs
         centered
         defaultActiveKey="1"

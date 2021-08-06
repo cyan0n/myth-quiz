@@ -41,7 +41,7 @@ const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
   };
 
   return (
-    <PageLayout>
+    <PageLayout user={_user ?? undefined}>
       <Typography.Title>{quiz.name}</Typography.Title>
       <Image
         width={200}

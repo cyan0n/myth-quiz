@@ -18,7 +18,7 @@ const MythResults: MythResultsComponent = ({ ladder, user, quiz }) => {
     (score) => JSON.stringify(score.user) == JSON.stringify(user),
   );
   return (
-    <PageLayout>
+    <PageLayout user={user}>
       <Tabs
         defaultActiveKey="1"
         type="card"
