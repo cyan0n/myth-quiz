@@ -1,5 +1,5 @@
 import { Button, Form, Image, Input, Modal, Typography } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import PageLayout from "../../components/PageLayout";
 import { useRouter } from "next/router";
 import RegistrationModal from "../../components/RegistrationModal";
@@ -19,10 +19,11 @@ interface LandingProps {
 const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
   const router = useRouter();
   const { myth } = router.query;
+  const [_user, setUser] = useState<string | undefined>(user);
 
   const handleAnswer = async (question_Idx: number, answer: any) => {
     await Api.post("save_answer", {
-      user,
+      user: _user,
       quiz: quiz.slug,
       question: question_Idx,
       answer,
@@ -30,12 +31,13 @@ const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
   };
 
   const handleComplete = async () => {
-    await Api.post("calculate", { user, quiz: quiz.slug });
+    await Api.post("calculate", { user: _user, quiz: quiz.slug });
     router.push(`${myth}/results`);
   };
 
   const handleRegistration = (user: string) => {
     Api.post("start_quiz", { user, quiz: quiz.slug });
+    setUser(user);
   };
 
   return (
