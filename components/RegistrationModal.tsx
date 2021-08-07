@@ -32,7 +32,7 @@ const RegistrationModal: RegistrationModalCompoent = ({ user, onRegister }) => {
         >
           <Input />
         </Form.Item>
-        <Form.Item>
+        <Form.Item style={{ textAlign: "center" }}>
           <Button type="primary" htmlType="submit">
             Inizia
           </Button>
