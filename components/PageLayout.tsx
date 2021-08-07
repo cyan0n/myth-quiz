@@ -18,7 +18,7 @@ export default function PageLayout({
 }) {
   return (
     <Layout style={{ height: "100vh" }}>
-      <Layout.Header>
+      <Layout.Header style={{ backgroundColor: "#51673F" }}>
         {user && (
           <Space direction="horizontal">
             <Typography.Title style={{ color: "white" }} level={3}>
