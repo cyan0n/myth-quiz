@@ -46,7 +46,13 @@ const Landing: React.FC<LandingProps> = ({ user, quiz, checkpoint }) => {
       <Image
         width={200}
         src={`/images/${quiz.slug}.png`}
-        style={{ borderRadius: "100%" }}
+        style={{
+          borderRadius: "100%",
+          borderColor: "#AC8248",
+          borderStyle: "solid",
+          borderWidth: ".2rem",
+        }}
+        preview={false}
       />
       <Questions
         questions={quiz.quiz}

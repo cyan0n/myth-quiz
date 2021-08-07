@@ -51,7 +51,11 @@ const Questions: QuestionsComponent = ({
 
   return (
     <Space direction="vertical">
-      <Progress percent={(step / questions.length) * 100} showInfo={false} />
+      <Progress
+        strokeColor="#AC8248"
+        percent={(step / questions.length) * 100}
+        showInfo={false}
+      />
       <Card
         style={{ width: "95vw" }}
         actions={[
